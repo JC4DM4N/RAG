@@ -4,7 +4,7 @@ import faiss
 import numpy as np
 
 
-MODEL_PATH = "/Users/james/Documents/own_tech/model_dir/mistral-7b-instruct-v0.2.Q4_K_M.gguf"
+MODEL_PATH = "../../model_dir/mistral-7b-instruct-v0.2.Q4_K_M.gguf"
 
 def load_data():
 
