@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import numpy as np
 import faiss
+import argparse
+import json
 from nltk.tokenize import sent_tokenize
 from ctransformers import AutoModelForCausalLM
 from sentence_transformers import SentenceTransformer
@@ -9,30 +11,11 @@ from sentence_transformers import SentenceTransformer
 MODEL_PATH = "../../model_dir/mistral-7b-instruct-v0.2.Q4_K_M.gguf"
 
 
-def load_cutsom_data():
-
-    texts = np.array([
-        "James is a man",
-        "Mary is a woman",
-        "Frankie is a dog",
-        "James is a Data Scientist",
-        "James is from Sheffield",
-        "Mary is from Lincoln",
-        "Mary has a PhD in statistics",
-        "Frankie does not have a job",
-    ])
-
-    # with open("article.txt", "r") as f:
-    #     lines = f.readlines()
-    # texts = np.array([line.replace("\n", "") for line in lines if line.replace("\n", "")])
-
-    return np.array(texts)
-
-
 def load_web_page(url):
+    print(f"ingesting data from {url}")
     r = requests.get(url)
     soup = BeautifulSoup(r.text, "html.parser")
-    return chunk_texts(soup.text)
+    return soup.text.replace(".", ". ")
 
 
 def chunk_texts(text: str, chunk_size: int = 64, overlap: bool = True):
@@ -68,44 +51,52 @@ def chunk_texts(text: str, chunk_size: int = 64, overlap: bool = True):
     return np.array(["\n\n".join(chunk) for chunk in chunks])
 
 
-if __name__ == "__main__":
-
+def RAG(query: str):
     embedding_model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
-    url = "https://www.bbc.co.uk/sport/football/articles/c9ee3rz5r20o"
-    texts = load_web_page(url)
+    context_urls = json.load(open("./context_urls.json", "r"))
 
+    texts = np.array([chunk for url in context_urls for chunk in chunk_texts(load_web_page(url))])
+
+    print("embedding texts...")
     embeddings = embedding_model.encode(texts)
 
     # Create a FAISS index
-    index = faiss.IndexFlatL2(embeddings.shape[1]) # Using L2 distance metric
+    index = faiss.IndexFlatL2(embeddings.shape[1])  # Using L2 distance metric
     index.add(embeddings)
 
-    query = "Tell me what you know about Arsenal"
     embedded_query = embedding_model.encode(query)
 
+    print("searching vector db for context...")
     distances, indices = index.search(np.array([embedded_query]), k=3)
 
     context = texts[indices[0]]
 
-    print("="*50)
+    print("=" * 50)
     print("Relevant context found:")
-    print("-"*50)
+    print("-" * 50)
     print(context)
 
     formatted_context = "\n\n".join(context)
 
     prompt = (f"""
-          You are an assistant for question-answering tasks.
-          Use the following pieces of retrieved context to
-          answer the question.
-          If you don't know the answer, just say that you don't know.
-          Use three sentences maximum and keep the answer concise.
-          Question: {query}
-          Context: {formatted_context}
-          Answer:"""
+        You are an assistant for question-answering tasks.
+        Use the following pieces of retrieved context to
+        answer the question.
+        If you don't know the answer, just say that you don't know.
+        Use three sentences maximum and keep the answer concise.
+        Question: {query}
+        Context: {formatted_context}
+        Answer:"""
     )
 
-    print("="*50)
+    print("=" * 50)
     llm = AutoModelForCausalLM.from_pretrained(MODEL_PATH, model_type="mistral")
     print(llm(prompt))
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("query")
+    args = parser.parse_args()
+    RAG(args.query)
