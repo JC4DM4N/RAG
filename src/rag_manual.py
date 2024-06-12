@@ -9,19 +9,18 @@ from sentence_transformers import SentenceTransformer
 MODEL_PATH = "../../model_dir/mistral-7b-instruct-v0.2.Q4_K_M.gguf"
 
 
-def load_data():
+def load_cutsom_data():
 
-    # texts = np.array([
-    #     "James is a man",
-    #     "Mary is a woman",
-    #     "Frankie is a dog",
-    #     "James is a Data Scientist",
-    #     "James is from Sheffield",
-    #     "Mary is from Lincoln",
-    #     "Mary has a PhD in statistics",
-    #     "Frankie does not have a job",
-    #     "Frankie is very chubby"
-    # ])
+    texts = np.array([
+        "James is a man",
+        "Mary is a woman",
+        "Frankie is a dog",
+        "James is a Data Scientist",
+        "James is from Sheffield",
+        "Mary is from Lincoln",
+        "Mary has a PhD in statistics",
+        "Frankie does not have a job",
+    ])
 
     # with open("article.txt", "r") as f:
     #     lines = f.readlines()
