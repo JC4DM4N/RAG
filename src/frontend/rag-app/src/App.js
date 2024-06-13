@@ -7,7 +7,6 @@ import Navbar from './components/navbar'
 
 function App() {
   return (
-
       <Row>
         <Col xs={3} className="column-container">
             <Navbar />;
@@ -19,7 +18,4 @@ function App() {
   );
 }
 
-
 export default App;
-
-
