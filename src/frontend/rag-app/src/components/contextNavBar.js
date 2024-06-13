@@ -1,11 +1,14 @@
-import { useSessionStorage } from "usehooks-ts";
-
 import Container from "react-bootstrap/Container";
 import ContextForm from "./contextForm";
 import ContextList from "./contextList";
 
-function ContextNavBar({ updateActiveContext, contextValues, setContextValues, activeContextItems }) {
-
+function ContextNavBar({
+  updateActiveContext,
+  contextValues,
+  setContextValues,
+  activeContextValues,
+  setActiveContextValues,
+}) {
   const onFormSubmit = (event, inputValue) => {
     event.preventDefault();
     if (contextValues.includes(inputValue)) {
@@ -25,9 +28,11 @@ function ContextNavBar({ updateActiveContext, contextValues, setContextValues, a
       </Container>
       <Container>
         <ContextList
-          values={contextValues}
+          contextValues={contextValues}
           updateActiveContext={updateActiveContext}
-          activeContextItems={activeContextItems}
+          setContextValues={setContextValues}
+          activeContextValues={activeContextValues}
+          setActiveContextValues={setActiveContextValues}
         />
       </Container>
     </>

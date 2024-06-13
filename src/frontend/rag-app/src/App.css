@@ -14,7 +14,6 @@
 }
 
 .query-form-contents {
-
   height: 8vh;
 }
 
@@ -31,4 +30,19 @@
   padding: 10px;
   margin-bottom: 10px;
   height: 100vh;
+}
+
+.context-list-item-text{
+  width: 90%;
+  overflow: scroll;
+  float: left;
+}
+
+.context-list-item-remove-button{
+  width: 5%;
+  float: right;
+}
+
+.context-list-item{
+  overflow: scroll;
 }

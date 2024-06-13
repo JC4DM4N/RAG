@@ -9,20 +9,20 @@ import QueryForm from "./components/queryForm";
 import ResponseContainer from "./components/responseContainer";
 
 function App() {
-  // const [activeContextItems, setActiveContextItems] = useSessionStorage("activeContextItems", []);
-  // const [containerData, setContainerData] = useSessionStorage(
-  //   "containerData",
-  //   "Container to store query outputs"
-  // );
   const [contextValues, setContextValues, removeContextValues] =
-  useSessionStorage("contextValues", []);
-  const [activeContextItems, setActiveContextItems, removeActiveContextItems] =
-    useSessionStorage("activeContextItems", []);
-  const [containerData, setContainerData] = useState("Container to store query outputs");
+    useSessionStorage("contextValues", []);
+  const [
+    activeContextValues,
+    setActiveContextValues,
+    removeActiveContextValues,
+  ] = useSessionStorage("activeContextItems", []);
+  const [containerData, setContainerData] = useState(
+    "Container to store query outputs"
+  );
 
   const updateActiveContext = (event, value) => {
     event.preventDefault();
-    setActiveContextItems((prevActiveItems) => {
+    setActiveContextValues((prevActiveItems) => {
       if (prevActiveItems.includes(value)) {
         return prevActiveItems.filter((item) => item !== value);
       } else {
@@ -37,7 +37,7 @@ function App() {
     setContainerData(
       <div>
         <h3>The current active context items are:</h3>
-        {activeContextItems.map((item, index) => (
+        {activeContextValues.map((item, index) => (
           <p key={index}>{item}</p>
         ))}
       </div>
@@ -51,7 +51,8 @@ function App() {
           updateActiveContext={updateActiveContext}
           contextValues={contextValues}
           setContextValues={setContextValues}
-          activeContextItems={activeContextItems}
+          activeContextValues={activeContextValues}
+          setActiveContextValues={setActiveContextValues}
         />
       </Col>
       <Col xs={9} className="column-container">
