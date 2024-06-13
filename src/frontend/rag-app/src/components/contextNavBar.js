@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
-import QueryForm from './queryForm'
+import ContextForm from './contextForm'
 import ContextList from './contextList'
 
-function NavBar() {
+function ContextNavBar() {
   const [contextValues, setContextValues] = useState([]);
 
   const onFormSubmit = (event, inputValue) => {
     event.preventDefault();
-    setContextValues([...contextValues, inputValue]);
+    if (contextValues.includes(inputValue)){
+      return contextValues
+    } else {
+      return setContextValues([...contextValues, inputValue]);
+    }
   }
 
   return (
     <>
         <Container>
-            <QueryForm placeholder="Enter URL of context article" onFormSubmit={onFormSubmit}/>
+            <ContextForm placeholder="Enter URL of context article" onFormSubmit={onFormSubmit}/>
         </Container>
         <Container>
             <ContextList values={contextValues}/>
@@ -25,4 +29,4 @@ function NavBar() {
 }
 
 
-export default NavBar;
+export default ContextNavBar;

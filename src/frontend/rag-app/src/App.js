@@ -3,16 +3,19 @@ import './App.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import Navbar from './components/navbar'
+import ContextNavBar from './components/contextNavBar'
+import QueryForm from './components/queryForm'
+import ResponseContainer from './components/responseContainer'
 
 function App() {
   return (
       <Row>
         <Col xs={3} className="column-container">
-            <Navbar />;
+            <ContextNavBar />;
         </Col>
         <Col xs={9} className="column-container">
-            <h1>This is where the query and output form will go.</h1>
+            <ResponseContainer />
+            <QueryForm />
         </Col>
       </Row>
   );
