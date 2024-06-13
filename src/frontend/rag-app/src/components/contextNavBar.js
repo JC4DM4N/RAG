@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import { useSessionStorage } from "usehooks-ts";
 
 import Container from "react-bootstrap/Container";
 import ContextForm from "./contextForm";
 import ContextList from "./contextList";
 
 function ContextNavBar({ updateActiveContext, activeContextItems }) {
-  const [contextValues, setContextValues] = useState([]);
+  const [contextValues, setContextValues, removeContextValues] =
+    useSessionStorage("contextValues", []);
 
   const onFormSubmit = (event, inputValue) => {
     event.preventDefault();

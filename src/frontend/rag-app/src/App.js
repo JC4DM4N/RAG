@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import { useSessionStorage } from "usehooks-ts";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -8,10 +8,15 @@ import QueryForm from "./components/queryForm";
 import ResponseContainer from "./components/responseContainer";
 
 function App() {
-  const [activeContextItems, setActiveContextItems] = useState([]);
-  const [containerData, setContainerData] = useState(
-    "Container to store query outputs"
-  );
+  // const [activeContextItems, setActiveContextItems] = useSessionStorage("activeContextItems", []);
+  // const [containerData, setContainerData] = useSessionStorage(
+  //   "containerData",
+  //   "Container to store query outputs"
+  // );
+  const [activeContextItems, setActiveContextItems, removeActiveContextItems] =
+    useSessionStorage("activeContextItems", "");
+  const [containerData, setContainerData, removeContainerData] =
+    useSessionStorage("containerData", "Container to store query outputs");
 
   const updateActiveContext = (event, value) => {
     event.preventDefault();
@@ -44,7 +49,6 @@ function App() {
           updateActiveContext={updateActiveContext}
           activeContextItems={activeContextItems}
         />
-        ;
       </Col>
       <Col xs={9} className="column-container">
         <ResponseContainer containerData={containerData} />
