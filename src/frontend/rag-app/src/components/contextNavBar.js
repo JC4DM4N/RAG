@@ -4,9 +4,7 @@ import Container from "react-bootstrap/Container";
 import ContextForm from "./contextForm";
 import ContextList from "./contextList";
 
-function ContextNavBar({ updateActiveContext, activeContextItems }) {
-  const [contextValues, setContextValues, removeContextValues] =
-    useSessionStorage("contextValues", []);
+function ContextNavBar({ updateActiveContext, contextValues, setContextValues, activeContextItems }) {
 
   const onFormSubmit = (event, inputValue) => {
     event.preventDefault();

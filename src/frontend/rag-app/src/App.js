@@ -1,5 +1,6 @@
 import "./App.css";
 import { useSessionStorage } from "usehooks-ts";
+import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -13,10 +14,11 @@ function App() {
   //   "containerData",
   //   "Container to store query outputs"
   // );
+  const [contextValues, setContextValues, removeContextValues] =
+  useSessionStorage("contextValues", []);
   const [activeContextItems, setActiveContextItems, removeActiveContextItems] =
-    useSessionStorage("activeContextItems", "");
-  const [containerData, setContainerData, removeContainerData] =
-    useSessionStorage("containerData", "Container to store query outputs");
+    useSessionStorage("activeContextItems", []);
+  const [containerData, setContainerData] = useState("Container to store query outputs");
 
   const updateActiveContext = (event, value) => {
     event.preventDefault();
@@ -47,6 +49,8 @@ function App() {
       <Col xs={3} className="column-container">
         <ContextNavBar
           updateActiveContext={updateActiveContext}
+          contextValues={contextValues}
+          setContextValues={setContextValues}
           activeContextItems={activeContextItems}
         />
       </Col>
