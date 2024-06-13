@@ -1,11 +1,10 @@
-import '../App.css'
+import "../App.css";
 
-import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
 
 function ContextForm({ placeholder, onFormSubmit }) {
-
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -18,7 +17,7 @@ function ContextForm({ placeholder, onFormSubmit }) {
   };
 
   const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       event.preventDefault(); // Prevent the default behavior of the Enter key
       handleSubmit(event); // Submit the form
     }
@@ -28,14 +27,10 @@ function ContextForm({ placeholder, onFormSubmit }) {
     <>
       <Form
         className="context-form"
-        onKeyPress={handleKeyPress}
+        onKeyDown={handleKeyPress}
         onChange={handleInputChange}
       >
-      <Form.Control
-        type="text"
-        id="queryform"
-        placeholder={placeholder}
-      />
+        <Form.Control type="text" id="contextform" placeholder={placeholder} />
       </Form>
     </>
   );

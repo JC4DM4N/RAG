@@ -1,9 +1,9 @@
-import Card from 'react-bootstrap/Card';
+import Card from "react-bootstrap/Card";
 
-function ResponseContainer() {
+function ResponseContainer({ containerData }) {
   return (
-    <Card className='response-container'>
-      <Card.Body className='response-container-body'>This is some text within a card body.</Card.Body>
+    <Card className="response-container">
+      <Card.Body className="response-container-body">{containerData}</Card.Body>
     </Card>
   );
 }
