@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.query-form {
+  padding: 20px;
+}
+
 .column-container {
   border: 1px solid black;
   padding: 10px;

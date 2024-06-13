@@ -1,19 +1,24 @@
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
+import React, { useState } from 'react';
 
+import Container from 'react-bootstrap/Container';
 import QueryForm from './queryForm'
 import ContextList from './contextList'
 
 function NavBar() {
-  const context_values = ["Context Article 1", "Context Article 2"];
+  const [contextValues, setContextValues] = useState([]);
+
+  const onFormSubmit = (event, inputValue) => {
+    event.preventDefault();
+    setContextValues([...contextValues, inputValue]);
+  }
+
   return (
     <>
         <Container>
-            <QueryForm placeholder="enter url" />
+            <QueryForm placeholder="Enter URL of context article" onFormSubmit={onFormSubmit}/>
         </Container>
         <Container>
-            <ContextList values={context_values}/>
+            <ContextList values={contextValues}/>
         </Container>
     </>
   );
