@@ -3,46 +3,87 @@
 }
 
 .context-form {
-  padding: 20px;
+  padding: 20px 0px 20px 0px;
+}
+
+.query-form-container {
+  margin-right: 2vw;
 }
 
 .query-form {
   padding-top: 10px;
   position: relative;
-  width: 100%;
   height: 8vh;
 }
 
 .query-form-contents {
   height: 8vh;
+  border-radius: 25px !important;
+  padding: 20px !important;
+}
+
+.query-form-submit-button {
+  float: left;
+  width: 10%;
 }
 
 .response-container {
   padding: 20px;
+  margin-bottom: 2vh;
+  margin-right: 2vw;
+  border-radius: 25px !important;
+}
+
+.query-form-submit-buttom {
+  width: 5%;
 }
 
 .response-container-body {
-  height: 85vh;
+  height: 80vh;
 }
 
 .column-container {
-  border: 1px solid black;
   padding: 10px;
   margin-bottom: 10px;
   height: 100vh;
+  background: #f9f9f9;
 }
 
-.context-list-item-text{
+.context-nav-bar-container{
+  padding-left: 20px;
+}
+
+.context-list-item-text {
   width: 90%;
   overflow: scroll;
   float: left;
 }
 
-.context-list-item-remove-button{
-  width: 5%;
+.context-list-item-remove-button-div {
   float: right;
 }
 
-.context-list-item{
+.context-list-item-remove-button {
+  width: 10px;
+  height: 10px;
+}
+
+.context-list-item-remove-button:hover{
+  stroke-width: 1px;
+}
+
+.context-list-item {
   overflow: scroll;
+}
+
+.context-list-item.active {
+  background-color: #ececec !important;
+  border-color: #ececec !important;
+  color: black !important;
+}
+
+.context-list-item:hover {
+  background-color: #ececec !important;
+  border-color: #ececec !important;
+  color: black !important;
 }

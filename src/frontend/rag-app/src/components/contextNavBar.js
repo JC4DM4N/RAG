@@ -19,7 +19,7 @@ function ContextNavBar({
   };
 
   return (
-    <>
+    <div className="context-nav-bar-container">
       <Container>
         <ContextForm
           placeholder="Enter URL of context article"
@@ -35,7 +35,7 @@ function ContextNavBar({
           setActiveContextValues={setActiveContextValues}
         />
       </Container>
-    </>
+    </div>
   );
 }
 

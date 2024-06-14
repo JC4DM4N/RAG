@@ -34,8 +34,9 @@ function ContextList({
           className="context-list-item"
         >
           <div className="context-list-item-text">{value}</div>
-          <div className="context-list-item-remove-button">
+          <div className="context-list-item-remove-button-div">
             <VscChromeClose
+              className="context-list-item-remove-button"
               onClick={(event) => removeButtonClickHandler(event, value)}
             />
           </div>

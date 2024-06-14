@@ -1,6 +1,8 @@
 import "../App.css";
 
-import Form from "react-bootstrap/Form";
+import { Form, Button, InputGroup } from "react-bootstrap";
+
+import { VscArrowCircleUp } from "react-icons/vsc";
 
 function QueryForm({ querySubmitHandler }) {
   const handleSubmit = (event) => {
@@ -16,17 +18,20 @@ function QueryForm({ querySubmitHandler }) {
   };
 
   return (
-    <>
+    <div className="query-form-container">
       <Form className="query-form">
-        <Form.Control
-          type="text"
-          id="queryform"
-          placeholder="Enter query"
-          className="query-form-contents"
-          onKeyDown={handleKeyPress}
-        />
+        <InputGroup>
+          <Form.Control
+            type="text"
+            id="queryform"
+            placeholder="Enter query"
+            className="query-form-contents"
+            onKeyDown={handleKeyPress}
+          />
+              <VscArrowCircleUp />
+        </InputGroup>
       </Form>
-    </>
+    </div>
   );
 }
 
