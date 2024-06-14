@@ -28,6 +28,7 @@ function ContextForm({ placeholder, onFormSubmit }) {
       <Form
         className="context-form"
         onKeyDown={handleKeyPress}
+        autoComplete="off"
       >
         <Form.Control type="text" id="contextform" placeholder={placeholder} value={inputValue} onChange={handleInputChange} />
       </Form>

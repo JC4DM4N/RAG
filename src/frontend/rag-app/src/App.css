@@ -60,6 +60,7 @@
   width: 90%;
   overflow: scroll;
   float: left;
+  overflow-wrap: break-word;
 }
 
 .context-list-item-remove-button-div {
@@ -81,14 +82,14 @@
 
 .context-list-item.active {
   background-color: #ececec !important;
-  border-color: #ececec !important;
+  border-color: #cfcfcf !important;
   color: black !important;
   font-weight: bold;
 }
 
 .context-list-item:hover {
   background-color: #ececec !important;
-  border-color: #ececec !important;
+  border-color: #cfcfcf !important;
   color: black !important;
 }
 

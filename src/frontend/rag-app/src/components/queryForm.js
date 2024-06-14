@@ -27,6 +27,7 @@ function QueryForm({ querySubmitHandler }) {
             placeholder="Enter query"
             className="query-form-contents"
             onKeyDown={handleKeyPress}
+            autoComplete="off"
           />
           <InputGroup.Text className="query-form-submit-button-container">
             <VscArrowCircleUp
