@@ -8,8 +8,8 @@ function ContextForm({ placeholder, onFormSubmit }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(inputValue);
     onFormSubmit(event, inputValue);
+    setInputValue("");
   };
 
   const handleInputChange = (event) => {
@@ -28,9 +28,8 @@ function ContextForm({ placeholder, onFormSubmit }) {
       <Form
         className="context-form"
         onKeyDown={handleKeyPress}
-        onChange={handleInputChange}
       >
-        <Form.Control type="text" id="contextform" placeholder={placeholder} />
+        <Form.Control type="text" id="contextform" placeholder={placeholder} value={inputValue} onChange={handleInputChange} />
       </Form>
     </>
   );

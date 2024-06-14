@@ -87,3 +87,7 @@
   border-color: #ececec !important;
   color: black !important;
 }
+
+.context-list-item:active {
+  background-color: #d1d0d0 !important;
+}

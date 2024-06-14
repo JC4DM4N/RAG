@@ -1,6 +1,6 @@
 import "../App.css";
 
-import { Form, Button, InputGroup } from "react-bootstrap";
+import { Form, InputGroup } from "react-bootstrap";
 
 import { VscArrowCircleUp } from "react-icons/vsc";
 
@@ -28,7 +28,7 @@ function QueryForm({ querySubmitHandler }) {
             className="query-form-contents"
             onKeyDown={handleKeyPress}
           />
-              <VscArrowCircleUp />
+              <VscArrowCircleUp className="query-form-submit-button"/>
         </InputGroup>
       </Form>
     </div>

@@ -9,12 +9,11 @@ import QueryForm from "./components/queryForm";
 import ResponseContainer from "./components/responseContainer";
 
 function App() {
-  const [contextValues, setContextValues, removeContextValues] =
+  const [ contextValues, setContextValues ] =
     useSessionStorage("contextValues", []);
   const [
     activeContextValues,
-    setActiveContextValues,
-    removeActiveContextValues,
+    setActiveContextValues
   ] = useSessionStorage("activeContextItems", []);
   const [containerData, setContainerData] = useState(
     "Container to store query outputs"
