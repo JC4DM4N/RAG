@@ -6,3 +6,4 @@ numpy
 faiss-cpu
 pandas
 beautifulsoup4
+flask

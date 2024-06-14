@@ -1,12 +1,22 @@
 import "../App.css";
 
-import { Form, InputGroup } from "react-bootstrap";
+import { getData, postData } from "../api";
 
+import { Form, InputGroup } from "react-bootstrap";
 import { VscArrowCircleUp } from "react-icons/vsc";
 
 function QueryForm({ querySubmitHandler }) {
+  const handlePost = async () => {
+    const response = await getData();
+    console.log(response);
+    const data = { "context": [ "This is my context", "This is also my context" ] };
+    const response2 = await postData(data);
+    console.log(response2);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    handlePost();
     querySubmitHandler(event);
   };
 
