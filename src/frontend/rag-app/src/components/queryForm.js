@@ -28,7 +28,14 @@ function QueryForm({ querySubmitHandler }) {
             className="query-form-contents"
             onKeyDown={handleKeyPress}
           />
-              <VscArrowCircleUp className="query-form-submit-button"/>
+          <InputGroup.Text className="query-form-submit-button-container">
+            <VscArrowCircleUp
+              className="query-form-submit-button"
+              height="3em"
+              width="3em"
+              onClick={handleSubmit}
+            />
+          </InputGroup.Text>
         </InputGroup>
       </Form>
     </div>
