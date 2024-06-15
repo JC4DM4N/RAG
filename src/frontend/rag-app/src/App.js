@@ -35,7 +35,7 @@ function App() {
   };
 
   const handlePost = async () => {
-    const payload = { "context": activeContextValues, "query": queryValue };
+    const payload = { context: activeContextValues, query: queryValue };
     const response = await postData(payload);
 
     setContainerData(response);
@@ -46,14 +46,14 @@ function App() {
 
     handlePost();
 
-    setContainerData(
-      <div>
-        <h3>The current active context items are:</h3>
-        {activeContextValues.map((item, index) => (
-          <p key={index}>{item}</p>
-        ))}
-      </div>
-    );
+    // setContainerData(
+    //   <div>
+    //     <h3>The current active context items are:</h3>
+    //     {activeContextValues.map((item, index) => (
+    //       <p key={index}>{item}</p>
+    //     ))}
+    //   </div>
+    // );
   };
 
   return (

@@ -4,11 +4,15 @@ import numpy as np
 import faiss
 import argparse
 import json
+from typing import List
 from nltk.tokenize import sent_tokenize
 from ctransformers import AutoModelForCausalLM
 from sentence_transformers import SentenceTransformer
 
-MODEL_PATH = "../../model_dir/mistral-7b-instruct-v0.2.Q4_K_M.gguf"
+# MODEL_PATH = "../../model_dir/mistral-7b-instruct-v0.2.Q4_K_M.gguf"
+
+MODEL_PATH = "/Users/james/Documents/own_tech/model_dir/mistral-7b-instruct-v0.2.Q4_K_M.gguf"
+
 
 
 def load_web_page(url):
@@ -51,10 +55,8 @@ def chunk_texts(text: str, chunk_size: int = 64, overlap: bool = True):
     return np.array(["\n\n".join(chunk) for chunk in chunks])
 
 
-def RAG(query: str):
+def RAG(query: str, context_urls: List[str]):
     embedding_model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
-
-    context_urls = json.load(open("./context_urls.json", "r"))
 
     texts = np.array([chunk for url in context_urls for chunk in chunk_texts(load_web_page(url))])
 
@@ -92,7 +94,7 @@ def RAG(query: str):
 
     print("=" * 50)
     llm = AutoModelForCausalLM.from_pretrained(MODEL_PATH, model_type="mistral")
-    print(llm(prompt))
+    return llm(prompt)
 
 
 if __name__ == "__main__":
