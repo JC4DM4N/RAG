@@ -13,9 +13,8 @@ def get_data():
 @app.route("/api/data", methods=["POST"])
 def post_data():
     received_data = request.json
-    response = {"received": received_data}
-    print(response)
-    return jsonify(response)
+    print(received_data)
+    return jsonify("This is my response")
 
 
 if __name__ == "__main__":
