@@ -45,15 +45,6 @@ function App() {
     event.preventDefault();
 
     handlePost();
-
-    // setContainerData(
-    //   <div>
-    //     <h3>The current active context items are:</h3>
-    //     {activeContextValues.map((item, index) => (
-    //       <p key={index}>{item}</p>
-    //     ))}
-    //   </div>
-    // );
   };
 
   return (
