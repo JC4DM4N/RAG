@@ -19,7 +19,7 @@ function App() {
     []
   );
   const [containerData, setContainerData] = useState(
-    "Container to store query outputs"
+    []
   );
   const [queryValue, setQueryValue] = useState("");
 
@@ -38,7 +38,7 @@ function App() {
     const payload = { context: activeContextValues, query: queryValue };
     const response = await postData(payload);
 
-    setContainerData(response);
+    setContainerData([...containerData, response]);
   };
 
   const querySubmitHandler = (event) => {
