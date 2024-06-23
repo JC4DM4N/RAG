@@ -45,6 +45,10 @@
   height: 80vh;
 }
 
+.response-container-question-text {
+  font-weight: bold;
+}
+
 .column-container {
   padding: 10px;
   margin-bottom: 10px;

@@ -18,9 +18,8 @@ function App() {
     "activeContextItems",
     []
   );
-  const [containerData, setContainerData] = useState(
-    []
-  );
+  const [containerDataQuestions, setContainerDataQuestions] = useState([]);
+  const [containerDataResponses, setContainerDataResponses] = useState([]);
   const [queryValue, setQueryValue] = useState("");
 
   const updateActiveContext = (event, value) => {
@@ -38,12 +37,13 @@ function App() {
     const payload = { context: activeContextValues, query: queryValue };
     const response = await postData(payload);
 
-    setContainerData([...containerData, response]);
+    setContainerDataResponses([...containerDataResponses, response]);
   };
 
   const querySubmitHandler = (event) => {
     event.preventDefault();
 
+    setContainerDataQuestions([...containerDataQuestions, queryValue]);
     handlePost();
   };
 
@@ -59,7 +59,10 @@ function App() {
         />
       </Col>
       <Col xs={9} className="column-container">
-        <ResponseContainer containerData={containerData} />
+        <ResponseContainer
+          containerDataQuestions={containerDataQuestions}
+          containerDataResponses={containerDataResponses}
+        />
         <QueryForm
           querySubmitHandler={querySubmitHandler}
           setQueryValue={setQueryValue}

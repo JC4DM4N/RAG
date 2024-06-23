@@ -1,17 +1,28 @@
 import Card from "react-bootstrap/Card";
 
-function ResponseContainer({ containerData }) {
+function ResponseContainer({ containerDataQuestions, containerDataResponses }) {
 
-  const text = containerData.map((value, index) => (
-    <div key={index}>{value}</div>
-  ));
-
+  const textDiv = containerDataQuestions.map((value, index) => {
+    if (containerDataResponses.length > index) {
+      return (
+        <div key={index}>
+          <div className="response-container-question-text">{value}</div>
+          <div>{containerDataResponses[index]}</div>
+        </div>
+      ) 
+    }
+    else {
+      return (
+        <div key={index}>
+          <div className="response-container-question-text">{value}</div>
+        </div>
+      )
+    }
+  });
 
   return (
     <Card className="response-container">
-      <Card.Body className="response-container-body">
-        {text}
-      </Card.Body>
+      <Card.Body className="response-container-body">{textDiv}</Card.Body>
     </Card>
   );
 }
