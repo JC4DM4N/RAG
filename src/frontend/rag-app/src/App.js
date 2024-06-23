@@ -1,6 +1,6 @@
 import "./App.css";
 import { useSessionStorage } from "usehooks-ts";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -32,6 +32,11 @@ function App() {
       }
     });
   };
+
+  useEffect(() => {
+    var element = document.getElementById("response-container-body");
+    element.scrollTop = element.scrollHeight;
+  }, [containerDataQuestions, containerDataResponses]);
 
   const handlePost = async () => {
     const payload = { context: activeContextValues, query: queryValue };

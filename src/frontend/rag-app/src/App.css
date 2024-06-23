@@ -43,6 +43,11 @@
 
 .response-container-body {
   height: 80vh;
+  overflow: scroll;
+}
+
+.response-container-text-div {
+  padding-bottom: 20px;
 }
 
 .response-container-question-text {
