@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: ./src/backend
+      dockerfile: Dockerfile
+    # entrypoint: ["python", "flask/app.py"]
+    ports:
+      - "5000"
+    # volumes:
+    #   - .:/app
+    environment:
+      - FLASK_ENV=development
