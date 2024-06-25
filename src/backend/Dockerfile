@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 
 ENV PYTHONPATH /app/src/backend
 
-RUN python flask/app.py
+CMD ["python", "flask/app.py"]
