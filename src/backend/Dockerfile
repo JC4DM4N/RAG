@@ -4,7 +4,6 @@ WORKDIR /app/src/backend
 
 COPY . /app/src/backend/.
 
-# COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
 ENV PYTHONPATH /app/src/backend
