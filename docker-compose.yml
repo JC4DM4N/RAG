@@ -5,10 +5,18 @@ services:
     build: 
       context: ./src/backend
       dockerfile: Dockerfile
-    # entrypoint: ["python", "flask/app.py"]
     ports:
-      - "5000"
-    # volumes:
-    #   - .:/app
+      - 5001:5001
     environment:
       - FLASK_ENV=development
+
+  frontend:
+    build: 
+      context: ./src/frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - "/usr/src/frontend/node_modules"
+    depends_on:
+      - backend
