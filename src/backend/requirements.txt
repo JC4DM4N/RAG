@@ -7,4 +7,4 @@ faiss-cpu
 pandas
 beautifulsoup4
 flask
-flask_cors
+flask-cors
