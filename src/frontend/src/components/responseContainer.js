@@ -1,4 +1,5 @@
 import Card from "react-bootstrap/Card";
+import Spinner from 'react-bootstrap/Spinner';
 
 function ResponseContainer({ containerDataQuestions, containerDataResponses }) {
   const textDiv = containerDataQuestions.map((value, index) => {
@@ -18,6 +19,16 @@ function ResponseContainer({ containerDataQuestions, containerDataResponses }) {
         <div key={index}>
           <div className="response-container-question-text response-container-text-div">
             {value}
+          </div>
+          <div className="response-container-loading-status">
+            <Spinner
+              as="span"
+              animation="border"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />
+            <> Generating response...</>
           </div>
         </div>
       );
