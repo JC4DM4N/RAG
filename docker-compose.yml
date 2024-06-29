@@ -6,17 +6,22 @@ services:
       context: ./src/backend
       dockerfile: Dockerfile
     ports:
-      - 5001:5001
+      - "5000:5000"
     environment:
       - FLASK_ENV=development
+    networks:
+      - rag-network
 
   frontend:
-    build: 
+    build:
       context: ./src/frontend
       dockerfile: Dockerfile
     ports:
-      - 3000:3000
-    volumes:
-      - "/usr/src/frontend/node_modules"
+      - "3000:3000"
     depends_on:
       - backend
+    networks:
+      - rag-network
+
+networks:
+  rag-network:
