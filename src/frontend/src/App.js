@@ -46,7 +46,7 @@ function App() {
     formtext.setAttribute("disabled", "true");
     const response = await postData(payload);
     setContainerDataResponses([...containerDataResponses, response]);
-    formtext.setAttribute("disabled", "false");
+    formtext.removeAttribute("disabled", "false");
   };
 
   const querySubmitHandler = (event) => {
