@@ -23,11 +23,11 @@ function QueryForm({ querySubmitHandler, setQueryValue }) {
 
   return (
     <div className="query-form-container">
-      <Form className="query-form">
+      <Form className="query-form" id="queryform">
         <InputGroup>
           <Form.Control
             type="text"
-            id="queryform"
+            id="queryform-text"
             placeholder="Enter query"
             className="query-form-contents"
             onChange={handleInputChange}
@@ -37,9 +37,15 @@ function QueryForm({ querySubmitHandler, setQueryValue }) {
           <InputGroup.Text className="query-form-submit-button-container">
             <VscArrowCircleUp
               className="query-form-submit-button"
+              id="queryform-submit-button"
               height="3em"
               width="3em"
-              onClick={handleSubmit}
+              onClick={(e) => {
+                const element = document.getElementById("queryform-text");
+                if (element && element.getAttribute("disabled") !== "true") {
+                  handleSubmit(e);
+                }
+              }}
             />
           </InputGroup.Text>
         </InputGroup>

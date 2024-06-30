@@ -40,9 +40,13 @@ function App() {
 
   const handlePost = async () => {
     const payload = { context: activeContextValues, query: queryValue };
+    var form = document.getElementById("queryform");
+    var formtext = document.getElementById("queryform-text");
+    form.reset();
+    formtext.setAttribute("disabled", "true");
     const response = await postData(payload);
-
     setContainerDataResponses([...containerDataResponses, response]);
+    formtext.setAttribute("disabled", "false");
   };
 
   const querySubmitHandler = (event) => {
