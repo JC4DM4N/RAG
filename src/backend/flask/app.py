@@ -16,7 +16,6 @@ def get_data():
 @app.route("/api/data", methods=["POST"])
 def post_data():
     received_data = request.json
-    print(received_data)
     response = RAG(
         query=received_data["query"],
         context_urls=received_data["context"],
