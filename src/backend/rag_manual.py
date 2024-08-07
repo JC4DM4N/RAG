@@ -6,13 +6,12 @@ import argparse
 import json
 from typing import List
 from nltk.tokenize import sent_tokenize
-from ctransformers import AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForCausalLM
 from sentence_transformers import SentenceTransformer
 
-# MODEL_PATH = "../../model_dir/mistral-7b-instruct-v0.2.Q4_K_M.gguf"
-
-MODEL_PATH = "/Users/james/Documents/own_tech/model_dir/mistral-7b-instruct-v0.2.Q4_K_M.gguf"
-
+# huggingface model path
+#MODEL_PATH = "./model_dir/mistral-7b-instruct-v0.2.Q4_K_M.gguf"
+MODEL_PATH = "HuggingFaceTB/SmolLM-135M-Instruct"
 
 
 def load_web_page(url):
@@ -56,8 +55,10 @@ def chunk_texts(text: str, chunk_size: int = 64, overlap: bool = True):
 
 
 def RAG(query: str, context_urls: List[str]):
+    print("loading sent transformer model...")
     embedding_model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
+    print("loading web page...")
     texts = np.array([chunk for url in context_urls for chunk in chunk_texts(load_web_page(url))])
 
     print("embedding texts...")
@@ -93,12 +94,20 @@ def RAG(query: str, context_urls: List[str]):
     )
 
     print("=" * 50)
-    llm = AutoModelForCausalLM.from_pretrained(MODEL_PATH, model_type="mistral")
-    return llm(prompt)
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+    llm = AutoModelForCausalLM.from_pretrained(MODEL_PATH)
+
+    inputs = tokenizer.encode(prompt, return_tensors="pt")
+    outputs = llm.generate(inputs, max_new_tokens=25, temperature=0.6, top_p=0.92, do_sample=True)
+    result = tokenizer.decode(outputs[0])
+    return result
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("query")
+    parser.add_argument("query", default="What is the capital of the United Kingdom?")
     args = parser.parse_args()
-    RAG(args.query)
+
+    context_urls = ["https://en.wikipedia.org/wiki/United_Kingdom"]
+
+    RAG(args.query, context_urls)
