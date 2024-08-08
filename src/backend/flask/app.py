@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-from rag_manual import RAG
+from rag_manual import RAG, download_hf_models
 
 app = Flask(__name__)
 CORS(app)
@@ -24,4 +24,7 @@ def post_data():
 
 
 if __name__ == "__main__":
+    print("Downloading models...")
+    download_hf_models()
+    print("Running app...")
     app.run(host="0.0.0.0", port=5000)

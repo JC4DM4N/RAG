@@ -11,7 +11,8 @@ from sentence_transformers import SentenceTransformer
 
 # huggingface model path
 #MODEL_PATH = "./model_dir/mistral-7b-instruct-v0.2.Q4_K_M.gguf"
-MODEL_PATH = "HuggingFaceTB/SmolLM-135M-Instruct"
+SENT_TRANSFORMER_MODEL_PATH = "sentence-transformers/all-MiniLM-L6-v2"
+LLM_MODEL_PATH = "HuggingFaceTB/SmolLM-360M-Instruct"
 
 
 def load_web_page(url):
@@ -54,9 +55,15 @@ def chunk_texts(text: str, chunk_size: int = 64, overlap: bool = True):
     return np.array(["\n\n".join(chunk) for chunk in chunks])
 
 
+def download_hf_models():
+    SentenceTransformer(SENT_TRANSFORMER_MODEL_PATH)
+    AutoTokenizer.from_pretrained(LLM_MODEL_PATH)
+    AutoModelForCausalLM.from_pretrained(LLM_MODEL_PATH)
+
+
 def RAG(query: str, context_urls: List[str]):
     print("loading sent transformer model...")
-    embedding_model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+    embedding_model = SentenceTransformer(SENT_TRANSFORMER_MODEL_PATH)
 
     print("loading web page...")
     texts = np.array([chunk for url in context_urls for chunk in chunk_texts(load_web_page(url))])
@@ -94,8 +101,8 @@ def RAG(query: str, context_urls: List[str]):
     )
 
     print("=" * 50)
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-    llm = AutoModelForCausalLM.from_pretrained(MODEL_PATH)
+    tokenizer = AutoTokenizer.from_pretrained(LLM_MODEL_PATH)
+    llm = AutoModelForCausalLM.from_pretrained(LLM_MODEL_PATH)
 
     inputs = tokenizer.encode(prompt, return_tensors="pt")
     outputs = llm.generate(inputs, max_new_tokens=25, temperature=0.6, top_p=0.92, do_sample=True)
