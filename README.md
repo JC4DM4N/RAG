@@ -42,4 +42,4 @@ The choice of LLM can be configured within the backend's Dockerfile by changing 
 * mistralai/Mistral-Nemo-Instruct-2407 (https://huggingface.co/mistralai/Mistral-Nemo-Instruct-2407)
 * TheBloke/Mistral-7B-Instruct-v0.2-GGUF.Q4_K_M.gguf (from https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF)
 
-Note that the larger the LLM the longer the docker build will take, as the models will be downloaded locally, and the longer the model inference will take whenever submitting a query in the frontend.
+Note, the larger the LLM the longer the docker build will take, as the models will be downloaded locally. The model inference will also take longer whenever submitting a query in the frontend.
