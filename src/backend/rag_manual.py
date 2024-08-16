@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 import numpy as np
@@ -10,9 +11,12 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 from sentence_transformers import SentenceTransformer
 
 # huggingface model path
-#MODEL_PATH = "./model_dir/mistral-7b-instruct-v0.2.Q4_K_M.gguf"
-SENT_TRANSFORMER_MODEL_PATH = "sentence-transformers/all-MiniLM-L6-v2"
-LLM_MODEL_PATH = "HuggingFaceTB/SmolLM-360M-Instruct"
+SENT_TRANSFORMER_MODEL_PATH = os.getenv("SENT_TRANSFORMERS_MODEL")
+LLM_MODEL_PATH = os.getenv("LLM_MODEL")
+if not SENT_TRANSFORMER_MODEL_PATH:
+    SENT_TRANSFORMER_MODEL_PATH="sentence-transformers/all-MiniLM-L6-v2"
+if not LLM_MODEL_PATH:
+    LLM_MODEL_PATH = "TheBloke/Mistral-7B-Instruct-v0.2-GGUF"
 
 
 def load_web_page(url):
@@ -53,12 +57,6 @@ def chunk_texts(text: str, chunk_size: int = 64, overlap: bool = True):
                 current_chunk = [sent]
             current_chunk_length = sum([len(s.split()) for s in current_chunk])
     return np.array(["\n\n".join(chunk) for chunk in chunks])
-
-
-def download_hf_models():
-    SentenceTransformer(SENT_TRANSFORMER_MODEL_PATH)
-    AutoTokenizer.from_pretrained(LLM_MODEL_PATH)
-    AutoModelForCausalLM.from_pretrained(LLM_MODEL_PATH)
 
 
 def RAG(query: str, context_urls: List[str]):
